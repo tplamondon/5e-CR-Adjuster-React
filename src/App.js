@@ -867,7 +867,7 @@ If your monster uses different attack bonuses or save DCs, use the ones that wil
         <h2 class="textCentre">Adjust CR Below</h2>
         <p class="textCentre">Please ensure you've filled above out and calculated the current CR</p>
         <div class="slidecontainer">
-          <input type="range" onInput={changeSliderLabel} min="0" max="33" value="0" class="slider" ref={crScale} />
+          <input type="range" onInput={changeSliderLabel} min="0" max="33" defaultValue="0" class="slider" ref={crScale} />
           <p>
             CR: <span ref={crScaleText}>0</span>
           </p>

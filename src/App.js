@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { getFlyACBonus, getSaveThrowACBonus, getMultiplierForResistances, getCRString, getCRWithDifference, calcConstModifier, lookupIndexByCR } from "./utilities.js";
 import "./App.css";
 
 // "(.*?)" for finding stuff between quotes regex
@@ -8,6 +9,10 @@ import "./App.css";
 // $1
 
 function App() {
+  const [fliesCanDmgRange, setFliesCanDmgRange] = useState(false);
+  const ac = 0;
+  const [numberStates, setNumberStates] = useState([0, 0, 0, 0, 0]);
+
   const expectedCR = useRef(null);
   const defensiveCRDiv = useRef(null);
   const hitPointsValue = useRef(null);
@@ -25,7 +30,6 @@ function App() {
   const resistancesDiv = useRef(null);
   const vulnerabilities = useRef(null);
   const resistances = useRef(null);
-  const fliesCanDmgRange = useRef(null);
   const saveProficiencies = useRef(null);
   const errormsg = useRef(null);
   const errormsg2 = useRef(null);
@@ -269,137 +273,6 @@ If your monster uses different attack bonuses or save DCs, use the ones that wil
 
   //--------------------------------------------------------------------------------------//
   //                                                                                      //
-  //                         Helper Functions for CR Calculation                          //
-  //                                                                                      //
-  //--------------------------------------------------------------------------------------//
-
-  /**
-   *
-   * @returns AC bonus based on if it flies or not
-   */
-  function getFlyACBonus() {
-    let saveAmount = fliesCanDmgRange.checked;
-    let acBonus = 0;
-    if (saveAmount == true) {
-      let expectedCRStr = expectedCR.current.value;
-      //if cr string isn't in returns -1, otherwise returns index of it
-      let crIndex = CRStrarray.indexOf(expectedCRStr);
-      //get multplier for resistances/immunities based on expected CR, will be 1 if no resistances or immunities
-      let expectedCR = CRarray[crIndex];
-      if (expectedCR < 10) {
-        acBonus = 2;
-      }
-    }
-    return acBonus;
-  }
-
-  /**
-   *
-   * @returns AC bonus based on number of save proficiencies based on DMG
-   */
-  function getSaveThrowACBonus() {
-    let saveAmount = saveProficiencies.current.value;
-    if (saveAmount == "zeroToTwo") {
-      return 0;
-    } else if (saveAmount == "threeToFour") {
-      return 2;
-    } else {
-      return 4;
-    }
-  }
-
-  /**
-   *
-   * @param {*} expectedCR
-   * @returns multiplier
-   */
-  function getMultiplierForResistances(expectedCR) {
-    let resistanceType = resistances.current.value;
-    if (resistanceType == "none") {
-      return 1;
-    } else if (resistanceType == "resistances") {
-      if (expectedCR >= 1 && expectedCR <= 4) {
-        return 2;
-      } else if (expectedCR >= 5 && expectedCR <= 10) {
-        return 1.5;
-      } else if (expectedCR >= 11 && expectedCR <= 16) {
-        return 1.25;
-      } else {
-        return 1;
-      }
-    } else if (resistanceType == "immunities") {
-      if (expectedCR >= 1 && expectedCR <= 4) {
-        return 2;
-      } else if (expectedCR >= 5 && expectedCR <= 10) {
-        return 2;
-      } else if (expectedCR >= 11 && expectedCR <= 16) {
-        return 1.5;
-      } else {
-        return 1.25;
-      }
-    } else {
-      //shouldn't come here
-      console.log("Error in getMultiplierForResistances(expectedCR), couldn't find resistance type");
-      return -1;
-    }
-  }
-
-  /**
-   *
-   * @param {*} cr
-   * @returns CR string
-   */
-  function getCRString(cr) {
-    let str = cr;
-    if (cr == 0.125) {
-      str = "1/8";
-    } else if (cr == 0.25) {
-      str = "1/4";
-    } else if (cr == 0.5) {
-      str = "1/2";
-    }
-    return str;
-  }
-
-  /**
-   * Get's the difference between base CR and the adjustment
-   * @param {*} index
-   * @param {*} difference
-   */
-  function getCRWithDifference(index, difference) {
-    let newArrayPos = index + difference;
-    //if too low, just set CR for that is 0
-    if (newArrayPos < 0) {
-      return 0;
-    } else if (newArrayPos > CRarray.length) {
-      return -100;
-    }
-    return CRarray[index + difference];
-  }
-
-  function calcConstModifier() {
-    //10 == avge, every 2 up = +1, every 2 down = -1
-    let constitutionVal = constitution.current.value;
-    let constmodifier = Math.floor(constitutionVal / 2 - 5);
-    //log it
-    //console.log("constitution modifier is: " + constmodifier);
-    return constmodifier;
-  }
-
-  function lookupIndexByCR(cr) {
-    let i = 0;
-    for (i = 0; i < CRarray.length; i++) {
-      if (cr == CRarray[i]) {
-        return i;
-      }
-    }
-    //else we didn't get anything
-    console.log("Failed to lookup index of given CR");
-    return -1;
-  }
-
-  //--------------------------------------------------------------------------------------//
-  //                                                                                      //
   //                                Interactive Functions                                 //
   //                                                                                      //
   //--------------------------------------------------------------------------------------//
@@ -427,6 +300,33 @@ If your monster uses different attack bonuses or save DCs, use the ones that wil
   }
 
   function fieldChanged(event) {
+    const target = event.target;
+    let value = null;
+
+    if (target.type === "checkbox") {
+      value = target.checked;
+    } else if (target.type == "number") {
+      value = target.value;
+    } else if (target.type == "text") {
+      value = target.value;
+    }
+
+    let name = target.name;
+
+    if (name == "expectedCR") {
+    } else if (name == "hitPointsValue") {
+    } else if (name == "ac") {
+    } else if (name == "damagePerRound") {
+    } else if (name == "atkBonus") {
+    } else if (name == "useSave") {
+    } else if (name == "size") {
+    } else if (name == "hitdice") {
+    } else if (name == "constitution") {
+    } else if (name == "vulnerabilities") {
+    } else if (name == "resistances") {
+    } else if (name == "fliesCanDmgRange") {
+    } else if (name == "saveProficiencies") {
+    }
     healthchange();
     if (allFieldsFilled()) {
       calcAvgCR();
@@ -824,7 +724,7 @@ If your monster uses different attack bonuses or save DCs, use the ones that wil
                 <td className="width33">Flies and can deal damage at range (CR 0-9 only)</td>
                 <td className="width34"></td>
                 <td className="width33">
-                  <input type="checkbox" onChange={fieldChanged} ref={fliesCanDmgRange} name="fliesCanDmgRange" value="fliesCanDmgRange" />
+                  <input type="checkbox" onChange={fieldChanged} checked={fliesCanDmgRange} name="fliesCanDmgRange" value="fliesCanDmgRange" />
                 </td>
               </tr>
               <tr>

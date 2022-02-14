@@ -611,8 +611,8 @@ If your monster uses different attack bonuses or save DCs, use the ones that wil
     let oldHP = hitPointsValue.current.value;
     let expectedCRStr = expectedCR.current.value;
     //if cr string isn't in returns -1, otherwise returns index of it
-    let expectedCR = CRarray[CRStrarray.indexOf(expectedCRStr)];
-    let oldEffectiveHP = getEffectiveHP(oldHP, expectedCR);
+    let expectedCRVal = CRarray[CRStrarray.indexOf(expectedCRStr)];
+    let oldEffectiveHP = getEffectiveHP(oldHP, expectedCRVal);
     let oldHPIndex = getHPAmount(oldHP);
     //get scaling of HP between max and min values for CR
     let oldMinHP = 1;
@@ -638,13 +638,13 @@ If your monster uses different attack bonuses or save DCs, use the ones that wil
     }
     let newEffectiveHP = ((oldEffectiveHP - oldMinEffectiveHP) / (oldMaxEffectiveHP - oldMinEffectiveHP)) * (newEffectiveHPMax - newEffectiveHPMin) + newEffectiveHPMin;
     let newHPMultiplier = getMultiplierForResistances(CRarray[newCRIndex]) * getVulnerableMultiplier();
-    let newHP = Math.round(newEffectiveHP / newHPMultiplier);
+    let newHPVal = Math.round(newEffectiveHP / newHPMultiplier);
     //old ac stuff
     let effectiveACChange = (getHPAmount(newEffectiveHP) - newDefCRIndex) * -2;
     //let effectiveACChange = diffOldHP * -2;
     //ac bonus based on new CR value
     let newACBonus = getFlyACBonusVariable(CRStrarray[newCRIndex]) + getSaveThrowACBonus();
-    let newAC = ACarray[getHPAmount(newEffectiveHP)] + effectiveACChange - newACBonus;
+    let newACVal = ACarray[getHPAmount(newEffectiveHP)] + effectiveACChange - newACBonus;
 
     //!off CR stuff
     //get dmg difference
@@ -667,22 +667,22 @@ If your monster uses different attack bonuses or save DCs, use the ones that wil
     if (newOffCRIndex + diffOldDmg - 1 > 0) {
       newDmgMin = dmgarray[newOffCRIndex + diffOldDmg - 1] + 1;
     }
-    let newDmg = Math.round(((oldDmg - oldMinDmg) / (oldMaxDmg - oldMinDmg)) * (newDmgMax - newDmgMin) + newDmgMin);
+    let newDmgVal = Math.round(((oldDmg - oldMinDmg) / (oldMaxDmg - oldMinDmg)) * (newDmgMax - newDmgMin) + newDmgMin);
     //old atk bonus stuff
     let newAtk = 0;
-    let effectiveAtkSaveChange = (getDMGAmount(newDmg) - newOffCRIndex) * -2;
+    let effectiveAtkSaveChange = (getDMGAmount(newDmgVal) - newOffCRIndex) * -2;
     if (useSave.checked) {
       //save bonus based on new CR value
-      newAtk = savearray[getDMGAmount(newDmg)] + effectiveAtkSaveChange;
+      newAtk = savearray[getDMGAmount(newDmgVal)] + effectiveAtkSaveChange;
     } else {
       //atk bonus based on new CR value
-      newAtk = atkarray[getDMGAmount(newDmg)] + effectiveAtkSaveChange;
+      newAtk = atkarray[getDMGAmount(newDmgVal)] + effectiveAtkSaveChange;
     }
 
     //!set up values
-    newHP.current.innerHTML = newHP;
-    newAC.current.innerHTML = newAC;
-    newDmg.current.innerHTML = newDmg;
+    newHP.current.innerHTML = expectedCRVal;
+    newAC.current.innerHTML = newACVal;
+    newDmg.current.innerHTML = newDmgVal;
     newAtkBonus.current.innerHTML = newAtk;
 
     return;

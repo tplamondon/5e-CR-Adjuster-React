@@ -690,164 +690,166 @@ If your monster uses different attack bonuses or save DCs, use the ones that wil
 
   return (
     <div className="App">
-      <h1 class="textCentre">CR Adjuster</h1>
-      <p class="textCentre">Please input your base monsters statistics below</p>
+      <h1 className="textCentre">CR Adjuster</h1>
+      <p className="textCentre">Please input your base monsters statistics below</p>
 
-      <div class="padding10">
-        <table class="threeSpaced">
-          <tr>
-            <td>Expected Challenge Rating</td>
-            <td></td>
-            <td>
-              <td class="width33">
+      <div className="padding10">
+        <table className="threeSpaced">
+          <tbody>
+            <tr>
+              <td>Expected Challenge Rating</td>
+              <td></td>
+              <td className="width33">
                 <input type="text" onChange={fieldChanged} ref={expectedCR} name="expectedCR" />
               </td>
-            </td>
-          </tr>
+            </tr>
+          </tbody>
         </table>
       </div>
 
-      <div class="grid-container2 padding10">
+      <div className="grid-container2 padding10">
         <div ref={defensiveCRDiv}>
           <h3>Defensive</h3>
-          <table class="threeSpaced">
-            <tr>
-              <td class="width33">Hit Points</td>
-              <td class="width34"></td>
-              <td class="width33">
-                <input type="hidden" onChange={fieldChanged} ref={hitPointsValue} name="hitPointsValue" value="-1" />
-                <span ref={hitPoints}>???</span>
-              </td>
-            </tr>
-            <tr>
-              <td class="width33">Armour Class</td>
-              <td class="width34"></td>
-              <td class="width33">
-                <input type="number" onChange={fieldChanged} ref={ac} name="ac" min="1" max="50" />
-              </td>
-            </tr>
+          <table className="threeSpaced">
+            <tbody>
+              <tr>
+                <td className="width33">Hit Points</td>
+                <td className="width34"></td>
+                <td className="width33">
+                  <input type="hidden" onChange={fieldChanged} ref={hitPointsValue} name="hitPointsValue" value="-1" />
+                  <span ref={hitPoints}>???</span>
+                </td>
+              </tr>
+              <tr>
+                <td className="width33">Armour Class</td>
+                <td className="width34"></td>
+                <td className="width33">
+                  <input type="number" onChange={fieldChanged} ref={ac} name="ac" min="1" max="50" />
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
 
         <div ref={offensiveCRDiv}>
           <h3>Offensive</h3>
-          <table class="threeSpaced">
-            <tr>
-              <td class="width33">Damage Per Round</td>
-              <td class="width34"></td>
-              <td class="width33">
-                <input type="number" onChange={fieldChanged} ref={damagePerRound} name="damagePerRound" min="0" max="320" />
-              </td>
-            </tr>
-            <tr>
-              <td class="width33">Atack Bonus/Save DC</td>
-              <td class="width34"></td>
-              <td class="width33">
-                <input type="number" onChange={fieldChanged} ref={atkBonus} name="atkBonus" min="-5" max="50" />
-              </td>
-            </tr>
-            <tr>
-              <td class="width33">Uses Saves?</td>
-              <td class="width34"></td>
-              <td class="width33">
-                <input type="checkbox" onChange={fieldChanged} ref={useSave} name="useSave" />
-              </td>
-            </tr>
+          <table className="threeSpaced">
+            <tbody>
+              <tr>
+                <td className="width33">Damage Per Round</td>
+                <td className="width34"></td>
+                <td className="width33">
+                  <input type="number" onChange={fieldChanged} ref={damagePerRound} name="damagePerRound" min="0" max="320" />
+                </td>
+              </tr>
+              <tr>
+                <td className="width33">Atack Bonus/Save DC</td>
+                <td className="width34"></td>
+                <td className="width33">
+                  <input type="number" onChange={fieldChanged} ref={atkBonus} name="atkBonus" min="-5" max="50" />
+                </td>
+              </tr>
+              <tr>
+                <td className="width33">Uses Saves?</td>
+                <td className="width34"></td>
+                <td className="width33">
+                  <input type="checkbox" onChange={fieldChanged} ref={useSave} name="useSave" />
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
 
-      <div class="grid-container2 padding10">
+      <div className="grid-container2 padding10">
         <div ref={sizeDiv}>
           <h3>Size and Health</h3>
-          <table class="threeSpaced">
-            <tr>
-              <td class="width33">Size</td>
-              <td class="width34"></td>
-              <td class="width33">
-                <select onChange={fieldChanged} ref={size} name="size">
-                  <option value="4">Tiny</option>
-                  <option value="6">Small</option>
-                  <option selected value="8">
-                    Medium
-                  </option>
-                  <option value="10">Large</option>
-                  <option value="12">Huge</option>
-                  <option value="20">Gargantuan</option>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td class="width33">Hit Dice</td>
-              <td class="width34"></td>
-              <td class="width33">
-                <input type="number" onChange={fieldChanged} ref={hitdice} name="hitdice" min="1" max="500" />
-                <span ref={diceNumber}>d8</span>
-              </td>
-            </tr>
-            <tr>
-              <td class="width33">Constitution</td>
-              <td class="width34"></td>
-              <td class="width33">
-                <input type="number" onChange={fieldChanged} ref={constitution} name="constitution" min="1" max="30" />
-              </td>
-            </tr>
+          <table className="threeSpaced">
+            <tbody>
+              <tr>
+                <td className="width33">Size</td>
+                <td className="width34"></td>
+                <td className="width33">
+                  <select onChange={fieldChanged} ref={size} name="size" defaultValue={8}>
+                    <option value="4">Tiny</option>
+                    <option value="6">Small</option>
+                    <option value="8">Medium</option>
+                    <option value="10">Large</option>
+                    <option value="12">Huge</option>
+                    <option value="20">Gargantuan</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td className="width33">Hit Dice</td>
+                <td className="width34"></td>
+                <td className="width33">
+                  <input type="number" onChange={fieldChanged} ref={hitdice} name="hitdice" min="1" max="500" />
+                  <span ref={diceNumber}>d8</span>
+                </td>
+              </tr>
+              <tr>
+                <td className="width33">Constitution</td>
+                <td className="width34"></td>
+                <td className="width33">
+                  <input type="number" onChange={fieldChanged} ref={constitution} name="constitution" min="1" max="30" />
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
         <div ref={resistancesDiv}>
           <h3>Vulnerabilities and Resistances</h3>
-          <table class="threeSpaced">
-            <tr>
-              <td class="width33">Vulnerabilities</td>
-              <td class="width34"></td>
-              <td class="width33">
-                <input type="checkbox" onChange={fieldChanged} ref={vulnerabilities} name="vulnerabilities" value="vulnerabilities" />
-              </td>
-            </tr>
-            <tr>
-              <td class="width33">Resistances/Immunities</td>
-              <td class="width34"></td>
-              <td class="width33">
-                <select ref={resistances} onChange={fieldChanged} name="resistances">
-                  <option selected value="none">
-                    None
-                  </option>
-                  <option value="resistances">Resistances</option>
-                  <option value="immunities">Immunities</option>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <td class="width33">Flies and can deal damage at range (CR 0-9 only)</td>
-              <td class="width34"></td>
-              <td class="width33">
-                <input type="checkbox" onChange={fieldChanged} ref={fliesCanDmgRange} name="fliesCanDmgRange" value="fliesCanDmgRange" />
-              </td>
-            </tr>
-            <tr>
-              <td class="width33">Save Proficiencies</td>
-              <td class="width34"></td>
-              <td class="width33">
-                <select ref={saveProficiencies} onChange={fieldChanged} name="saveProficiencies">
-                  <option selected value="zeroToTwo">
-                    0-2
-                  </option>
-                  <option value="threeToFour">3-4</option>
-                  <option value="fiveOrMore">5+</option>
-                </select>
-              </td>
-            </tr>
+          <table className="threeSpaced">
+            <tbody>
+              <tr>
+                <td className="width33">Vulnerabilities</td>
+                <td className="width34"></td>
+                <td className="width33">
+                  <input type="checkbox" onChange={fieldChanged} ref={vulnerabilities} name="vulnerabilities" value="vulnerabilities" />
+                </td>
+              </tr>
+              <tr>
+                <td className="width33">Resistances/Immunities</td>
+                <td className="width34"></td>
+                <td className="width33">
+                  <select ref={resistances} onChange={fieldChanged} name="resistances" defaultValue={"none"}>
+                    <option value="none">None</option>
+                    <option value="resistances">Resistances</option>
+                    <option value="immunities">Immunities</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td className="width33">Flies and can deal damage at range (CR 0-9 only)</td>
+                <td className="width34"></td>
+                <td className="width33">
+                  <input type="checkbox" onChange={fieldChanged} ref={fliesCanDmgRange} name="fliesCanDmgRange" value="fliesCanDmgRange" />
+                </td>
+              </tr>
+              <tr>
+                <td className="width33">Save Proficiencies</td>
+                <td className="width34"></td>
+                <td className="width33">
+                  <select ref={saveProficiencies} onChange={fieldChanged} name="saveProficiencies" defaultValue={"zeroToTwo"}>
+                    <option value="zeroToTwo">0-2</option>
+                    <option value="threeToFour">3-4</option>
+                    <option value="fiveOrMore">5+</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
 
-      <div class="padding10">
+      <div className="padding10">
         <h3>Current CR Estimate</h3>
         <p>
-          <span class="error" ref={errormsg}></span>
+          <span className="error" ref={errormsg}></span>
         </p>
         <p>
-          <span class="error" ref={errormsg2}></span>
+          <span className="error" ref={errormsg2}></span>
         </p>
         <p>
           The Defensive Challenge Rating of the monster is: <span ref={defCR}>?</span>
@@ -863,11 +865,11 @@ If your monster uses different attack bonuses or save DCs, use the ones that wil
         <input type="hidden" ref={CRAverage} value="-1" />
       </div>
 
-      <div class="padding10">
-        <h2 class="textCentre">Adjust CR Below</h2>
-        <p class="textCentre">Please ensure you've filled above out and calculated the current CR</p>
-        <div class="slidecontainer">
-          <input type="range" onInput={changeSliderLabel} min="0" max="33" defaultValue="0" class="slider" ref={crScale} />
+      <div className="padding10">
+        <h2 className="textCentre">Adjust CR Below</h2>
+        <p className="textCentre">Please ensure you've filled above out and calculated the current CR</p>
+        <div className="slidecontainer">
+          <input type="range" onInput={changeSliderLabel} min="0" max="33" defaultValue="0" className="slider" ref={crScale} />
           <p>
             CR: <span ref={crScaleText}>0</span>
           </p>
@@ -879,38 +881,40 @@ If your monster uses different attack bonuses or save DCs, use the ones that wil
         </div>
       </div>
 
-      <div class="padding10">
+      <div className="padding10">
         <h3>New Values for CR</h3>
         <p>This is not perfect for adjusting, it gives a rough idea of some new stats you can use</p>
-        <table class="threeSpaced" class="width50">
-          <tr>
-            <td>HP</td>
-            <td></td>
-            <td>
-              <span ref={newHP}></span>
-            </td>
-          </tr>
-          <tr>
-            <td>AC</td>
-            <td></td>
-            <td>
-              <span ref={newAC}></span>
-            </td>
-          </tr>
-          <tr>
-            <td>Damage Per Round</td>
-            <td></td>
-            <td>
-              <span ref={newDmg}></span>
-            </td>
-          </tr>
-          <tr>
-            <td>Attack Bonus/Save DC</td>
-            <td></td>
-            <td>
-              <span ref={newAtkBonus}></span>
-            </td>
-          </tr>
+        <table className="threeSpaced" className="width50">
+          <tbody>
+            <tr>
+              <td>HP</td>
+              <td></td>
+              <td>
+                <span ref={newHP}></span>
+              </td>
+            </tr>
+            <tr>
+              <td>AC</td>
+              <td></td>
+              <td>
+                <span ref={newAC}></span>
+              </td>
+            </tr>
+            <tr>
+              <td>Damage Per Round</td>
+              <td></td>
+              <td>
+                <span ref={newDmg}></span>
+              </td>
+            </tr>
+            <tr>
+              <td>Attack Bonus/Save DC</td>
+              <td></td>
+              <td>
+                <span ref={newAtkBonus}></span>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>

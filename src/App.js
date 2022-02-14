@@ -153,6 +153,79 @@ function App() {
           </table>
         </div>
       </div>
+
+      <div class="padding10">
+        <h3>Current CR Estimate</h3>
+        <p>
+          <span class="error" id="errormsg"></span>
+        </p>
+        <p>
+          <span class="error" id="errormsg2"></span>
+        </p>
+        <p>
+          The Defensive Challenge Rating of the monster is: <span id="defCR">?</span>
+        </p>
+        <p>
+          The Offensive Challenge Rating of the monster is: <span id="offCR">?</span>
+        </p>
+        <p>
+          The Challenge Rating of the monster is: <span id="avgCR">?</span>
+        </p>
+        <input type="hidden" id="defenceCRAvg" value="-1" />
+        <input type="hidden" id="offenceCRAvg" value="-1" />
+        <input type="hidden" id="CRAverage" value="-1" />
+      </div>
+
+      <div class="padding10">
+        <h2 class="textCentre">Adjust CR Below</h2>
+        <p class="textCentre">Please ensure you've filled above out and calculated the current CR</p>
+        <div class="slidecontainer">
+          <input type="range" oninput="changeSliderLabel()" min="0" max="33" value="0" class="slider" id="crScale" />
+          <p>
+            CR: <span id="crScaleText">0</span>
+          </p>
+        </div>
+        <div>
+          <button type="button" onclick="adjustCR()">
+            Adjust CR
+          </button>
+        </div>
+      </div>
+
+      <div class="padding10">
+        <h3>New Values for CR</h3>
+        <p>This is not perfect for adjusting, it gives a rough idea of some new stats you can use</p>
+        <table class="threeSpaced" class="width50">
+          <tr>
+            <td>HP</td>
+            <td></td>
+            <td>
+              <span id="newHP"></span>
+            </td>
+          </tr>
+          <tr>
+            <td>AC</td>
+            <td></td>
+            <td>
+              <span id="newAC"></span>
+            </td>
+          </tr>
+          <tr>
+            <td>Damage Per Round</td>
+            <td></td>
+            <td>
+              <span id="newDmg"></span>
+            </td>
+          </tr>
+          <tr>
+            <td>Attack Bonus/Save DC</td>
+            <td></td>
+            <td>
+              <span id="newAtkBonus"></span>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
   );
 }
